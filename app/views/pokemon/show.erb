@@ -1,0 +1,23 @@
+<html>
+  <title>MyPokemon</title>
+  <body>
+    <h1> <%= @pokemon.name %></h1>
+    <br><br>
+    <h3>General Information</h3>
+    <p>Element Type: <%= @pokemon.element_type %></p>
+    <p>CP: <%= @pokemon.cp %></p>
+    <h3>Moves</h3>
+    <p>Fast Move: <%= @pokemon.fast_move %></p>
+    <p>Power Move: <%= @pokemon.power_move %></p>
+    <h3>Stats</h3>
+    <p>Attack: <%= @pokemon.attack %></p>
+    <p>Defense: <%= @pokemon.defense %></p>
+    <p>HP: <%= @pokemon.hp %></p>
+    <br><br><br>
+    <h2>To change any of these stats please click <a href="/pokemon/<%= @pokemon.id %>/edit">here</a>!</h2>
+    <br>
+    <form method="post" action="/pokemon/<%= @pokemon.id %>/delete">
+      <input type="submit" value="Remove Pokemon">
+    </form>
+  </body>
+</html>

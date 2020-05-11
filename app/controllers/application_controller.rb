@@ -84,4 +84,13 @@ class ApplicationController < Sinatra::Base
     pokemon = Pokemon.create(:name => params[:name], :element_type => params[:element_type], :cp => params[:cp], :user_id => user.id, :fast_move => params[:fast_move], :power_move => params[:power_move], :attack => params[:attack], :defense => params[:defense], :hp => params[:hp])
     redirect '/home'
   end
+  
+  get '/pokemon/:id' do
+    if !Helpers.is_logged_in?(session)
+      redirect '/'
+    end
+    @user = Helpers.current_user(session)
+    @pokemon = Pokemon.find(params[:id])
+    erb :"/pokemon/show"
+  end
 end
