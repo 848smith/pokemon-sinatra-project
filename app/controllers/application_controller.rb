@@ -76,7 +76,6 @@ class ApplicationController < Sinatra::Base
   end
   
   post '/pokemon' do
-    binding.pry
     user = Helpers.current_user(session)
     if params[:name].empty? || params[:element_type].empty? || params[:cp].empty? || params[:fast_move].empty? || params[:power_move].empty? || params[:attack].empty? || params[:defense].empty? || params[:hp].empty?
       redirect '/pokemon/new'
@@ -95,13 +94,7 @@ class ApplicationController < Sinatra::Base
   end
   
   post '/pokemon/:id/delete' do
-    if !Helpers.is_logged_in?(session)
-      redirect '/'
-    end
     @pokemon = Pokemon.find(params[:id])
-    if Helpers.current_user(session).id != @pokemon.user_id
-      redirect '/home'
-    end
     @pokemon.delete
     redirect '/home'
   end
@@ -110,10 +103,14 @@ class ApplicationController < Sinatra::Base
     if !Helpers.is_logged_in?(session)
       redirect '/'
     end
+    @pokemon = Pokemon.find(params[:id])
     if Helpers.current_user(session).id != @pokemon.user_id
       redirect '/home'
     end
-    @pokemon = Pokemon.find(params[:id])
     erb :"/pokemon/edit"
+  end
+  
+  post '/pokemon/:id' do
+    
   end
 end

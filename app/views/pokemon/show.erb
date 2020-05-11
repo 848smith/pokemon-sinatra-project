@@ -14,10 +14,12 @@
     <p>Defense: <%= @pokemon.defense %></p>
     <p>HP: <%= @pokemon.hp %></p>
     <br><br><br>
+    <% if !Helpers.current_user(session).id != @pokemon.user_id %>
     <h2>To change any of these stats please click <a href="/pokemon/<%= @pokemon.id %>/edit">here</a>!</h2>
     <br>
     <form method="post" action="/pokemon/<%= @pokemon.id %>/delete">
       <input type="submit" value="Remove Pokemon">
     </form>
+    <% end %>
   </body>
 </html>
