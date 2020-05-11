@@ -111,6 +111,12 @@ class ApplicationController < Sinatra::Base
   end
   
   post '/pokemon/:id' do
-    
+    pokemon = Pokemon.find(params[:id])
+    if params[:name].empty? || params[:element_type].empty? || params[:cp].empty? || params[:fast_move].empty? || params[:power_move].empty? || params[:attack].empty? || params[:defense].empty? || params[:hp].empty?
+      redirect "/pokemon/#{pokemon.id}/edit"
+    end
+    pokemon.update(:name => params[:name], :element_type => params[:element_type], :cp => params[:cp], :fast_move => params[:fast_move], :power_move => params[:power_move], :attack => params[:attack], :defense => params[:defense], :hp => params[:hp])
+    pokemon.save
+    redirect "/pokemon/#{pokemon.id}"
   end
 end
