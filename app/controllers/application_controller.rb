@@ -120,4 +120,12 @@ class ApplicationController < Sinatra::Base
     pokemon.save
     redirect "/pokemon/#{pokemon.id}"
   end
+  
+  get '/user/:id' do
+    if !Helpers.is_logged_in?(session)
+      redirect '/'
+    end
+    @user = User.find(params[:id])
+    erb :"/user/show"
+  end
 end
