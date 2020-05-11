@@ -126,6 +126,7 @@ class ApplicationController < Sinatra::Base
       redirect '/'
     end
     @user = User.find(params[:id])
+    @pokemons = Pokemon.select{|pokemon| pokemon.user_id == @user.id}
     erb :"/user/show"
   end
 end

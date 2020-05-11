@@ -2,5 +2,10 @@
   <title>MyPokemon</title>
   <body>
     <h1><%= @user.username %>'s Pokemon List</h1>
+    <% i = 1 %>
+    <% @pokemons.each do |pokemon| %>
+    <h3><%= "#{i}. #{pokemon.name}" %> <a href="/pokemon/<%= pokemon.id %>">View</a></h3>
+    <% i += 1 %>
+    <% end %>
   </body>
 </html>
