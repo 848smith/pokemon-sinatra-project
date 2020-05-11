@@ -1,7 +1,14 @@
 <html>
   <title>MyPokemon</title>
   <body>
-    <h1>Welcome back <%= @user.username %>!</h1>
+    <h1>Welcome back <%= @user.username %>!</h1><br>
+    <h3>Here Are Your Pokemon</h3>
+    <% i = 1 %>
+    <% @pokemons.each do |pokemon| %>
+    <p><%= "#{i}. #{pokemon.name}" %> <a href="/pokemon/<%= pokemon.id %>">View</a></p>
+    <% i += 1 %>
+    <% end %>
+    <br><br><br>
     <p><a href="/logout">Log Out</a></p>
   </body>
 </html>
