@@ -93,4 +93,16 @@ class ApplicationController < Sinatra::Base
     @pokemon = Pokemon.find(params[:id])
     erb :"/pokemon/show"
   end
+  
+  post '/pokemon/:id/delete' do
+    if !Helpers.is_logged_in?(session)
+      redirect '/'
+    end
+    @pokemon = Pokemon.find(params[:id])
+    if Helpers.current_user(session).id != @pokemon.user_id
+      redirect '/home'
+    end
+    @pokemon.delete
+    redirect '/home'
+  end
 end
