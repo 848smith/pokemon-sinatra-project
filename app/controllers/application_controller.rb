@@ -10,7 +10,7 @@ class ApplicationController < Sinatra::Base
   end
   
   get '/' do
-    erb :"/users/home"
+    erb :"/user/home"
   end
   
   get '/signup' do
@@ -22,6 +22,9 @@ class ApplicationController < Sinatra::Base
   
   post '/signup' do
     if params[:email] == "" || params[:username] == "" || params[:password] == ""
+      redirect '/signup'
+    end
+    if User.all.select{|user| (user.email == params[:email]) || (user.username == params[:email])}
       redirect '/signup'
     end
     user = User.create(:email => params[:email], :username => params[:username], :password => params[:password])
@@ -58,7 +61,7 @@ class ApplicationController < Sinatra::Base
     if !Helpers.is_logged_in?(session)
       redirect '/'
     end
-    @user = User.find(params[:id])
+    @user = Helpers.current_user(session)
     erb :"/pokemon/index"
   end
 end
