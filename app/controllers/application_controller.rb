@@ -24,7 +24,9 @@ class ApplicationController < Sinatra::Base
     if params[:email] == "" || params[:username] == "" || params[:password] == ""
       redirect '/signup'
     end
-    if User.all.select{|user| (user.email == params[:email]) || (user.username == params[:email])}
+    if User.all.map{|user| user.email}.include?(params[:email])
+      redirect '/signup'
+    elsif User.all.map{|user| user.username}.include?(params[:username])
       redirect '/signup'
     end
     user = User.create(:email => params[:email], :username => params[:username], :password => params[:password])
