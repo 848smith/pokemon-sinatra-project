@@ -20,7 +20,7 @@ class ApplicationController < Sinatra::Base
     erb :"/user/signup"
   end
   
-  post 'signup' do
+  post '/signup' do
     if params[:email] == "" || params[:username] == "" || params[:password] == ""
       redirect '/signup'
     end
@@ -30,6 +30,35 @@ class ApplicationController < Sinatra::Base
   end
   
   get '/login' do
+    if Helpers.is_logged_in?(session)
+      redirect '/home'
+    end
     erb :"/user/login"
+  end
+  
+  post '/login' do
+    user = User.find_by(:username => params[:username])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect '/home'
+    else
+      redirect '/login'
+    end
+  end
+  
+  get '/logout' do
+    if !Helpers.is_logged_in?(session)
+      redirect '/'
+    end
+    session.clear
+    redirect '/'
+  end
+  
+  get '/home' do
+    if !Helpers.is_logged_in?(session)
+      redirect '/'
+    end
+    @user = User.find(params[:id])
+    erb :"/pokemon/index"
   end
 end
