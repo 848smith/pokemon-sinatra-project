@@ -74,4 +74,13 @@ class ApplicationController < Sinatra::Base
     end
     erb :"/pokemon/new"
   end
+  
+  post '/pokemon' do
+    user = Helpers.current_user(session)
+    if params[:name].empty? || params[:type].empty? || params[:cp].empty? || params[:fast_move].empty? || params[:power_move].empty? || params[:attack].empty? || params[:defense].empty? || params[:hp].empty?
+      redirect '/pokemon/new'
+    end
+    pokemon = Pokemon.create(:name => params[:name], :type => params[:type], :cp => params[:cp], :user_id => user.id, :fast_move => params[:fast_move], :power_move => params[:power_move], :attack => params[:attack], :defense => params[:defense], :hp => params[:hp])
+    redirect '/home'
+  end
 end
