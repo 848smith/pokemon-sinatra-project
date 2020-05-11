@@ -10,12 +10,12 @@
     <% i += 1 %>
     <% end %>
     <% x = 1 %>
-    <% @users.each do |user| %>
     <h3>Other Trainers</h3>
+    <% @users.each do |user| %>
     <p><%= "#{x}. #{user.username}" %> <a href="/user/<%= user.id %>">View</a></p>
     <% x += 1 %>
     <% end %>
-    <br><br><br>
+    <br>
     <p><a href="/logout">Log Out</a></p>
   </body>
 </html>
