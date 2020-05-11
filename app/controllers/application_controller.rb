@@ -67,4 +67,11 @@ class ApplicationController < Sinatra::Base
     @pokemons = Pokemon.select{|pokemon| pokemon.user_id == @user.id}
     erb :"/pokemon/index"
   end
+  
+  get '/pokemon/new' do
+    if !Helpers.is_logged_in?(session)
+      redirect '/'
+    end
+    erb :"/pokemon/new"
+  end
 end
