@@ -64,6 +64,7 @@ class ApplicationController < Sinatra::Base
       redirect '/'
     end
     @user = Helpers.current_user(session)
+    @users = User.all
     @pokemons = Pokemon.select{|pokemon| pokemon.user_id == @user.id}
     erb :"/pokemon/index"
   end
