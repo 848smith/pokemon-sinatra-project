@@ -105,4 +105,15 @@ class ApplicationController < Sinatra::Base
     @pokemon.delete
     redirect '/home'
   end
+  
+  get '/pokemon/:id/edit' do
+    if !Helpers.is_logged_in?(session)
+      redirect '/'
+    end
+    if Helpers.current_user(session).id != @pokemon.user_id
+      redirect '/home'
+    end
+    @pokemon = Pokemon.find(params[:id])
+    erb :"/pokemon/edit"
+  end
 end

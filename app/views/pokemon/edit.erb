@@ -1,0 +1,28 @@
+<html>
+  <title>MyPokemon</title>
+  <body>
+    <h1>Edit your Pokemon below!</h1><br><br>
+    <form method="post" action="/pokemon/<%= @pokemon.id %>">
+      <h3>General</h3><br>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" value="<%= @pokemon.name %>"><br>
+      <label for="element_type">Type:</label>
+      <input type="text" id="element_type" name="element_type" value="<%= @pokemon.element_type %>"><br>
+      <label for="cp">CP:</label>
+      <input type="text" id="cp" name="cp" value="<%= @pokemon.cp %>"><br>
+      <h3>Moves</h3><br>
+      <label for="fast_move">Fast Move:</label>
+      <input type="text" id="fast_move" name="fast_move" value="<%= @pokemon.fast_move %>"><br>
+      <label for="power_move">Power Move:</label>
+      <input type="text" id="power_move" name="power_move" value="<%= @pokemon.power_move %>"><br>
+      <h3>Stats</h3><br>
+      <label for="attack">Attack:</label>
+      <input type="text" id="attack" name="attack" value="<%= @pokemon.attack %>"><br>
+      <label for="defense">Defense:</label>
+      <input type="text" id="defense" name="defense" value="<%= @pokemon.defense %>"><br>
+      <label for="hp">HP:</label>
+      <input type="text" id="hp" name="hp" value="<%= @pokemon.hp %>"><br>
+      <input type="submit" id="submit" value="Edit Pokemon">
+    </form>
+  </body>
+</html>
