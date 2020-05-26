@@ -94,8 +94,11 @@ class ApplicationController < Sinatra::Base
     erb :"/pokemon/show"
   end
   
-  post '/pokemon/:id/delete' do
+  delete '/pokemon/:id/delete' do
     @pokemon = Pokemon.find(params[:id])
+    if Helpers.current_user(session).id != @pokemon.user_id
+      redirect '/home'
+    end
     @pokemon.delete
     redirect '/home'
   end
@@ -111,7 +114,7 @@ class ApplicationController < Sinatra::Base
     erb :"/pokemon/edit"
   end
   
-  post '/pokemon/:id' do
+  update '/pokemon/:id' do
     pokemon = Pokemon.find(params[:id])
     if params[:name].empty? || params[:element_type].empty? || params[:cp].empty? || params[:fast_move].empty? || params[:power_move].empty? || params[:attack].empty? || params[:defense].empty? || params[:hp].empty?
       redirect "/pokemon/#{pokemon.id}/edit"
