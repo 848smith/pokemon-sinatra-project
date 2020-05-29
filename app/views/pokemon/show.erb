@@ -18,6 +18,7 @@
     <h2>To change any of these stats please click <a href="/pokemon/<%= @pokemon.id %>/edit">here</a>!</h2>
     <br>
     <form method="post" action="/pokemon/<%= @pokemon.id %>/delete">
+      <input id="hidden" type="hidden" name="_method" value="delete">
       <input type="submit" value="Remove Pokemon">
     </form>
     <% end %>
